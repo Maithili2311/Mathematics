@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formula Solver</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="h">
+        <nav>
+            <ul>
+                <li><a href="C:\Users\Nikhil\OneDrive\Desktop\New folder (2)\index.html">Home</a></li>
+                <li><a href="C:\Users\Nikhil\OneDrive\Desktop\New folder (2)\Quiz.html">Quiz</a></li>
+                <li><a href="C:\Users\Nikhil\OneDrive\Desktop\New folder (2)\formula.html">Formulas</a></li>
+                <li><a href="C:\Users\Nikhil\OneDrive\Desktop\New folder (2)\FAQs.html">FAQs</a></li>
+                <li><a href="http://localhost/login/">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Formula Solver</h2>
+        <label for="formula">Select a Formula:</label>
+        <select id="formula" onchange="showInputs()">
+            <option value="">--Select--</option>
+            <option value="sum_of_squares">A² + B²</option>
+            <option value="pythagorean_theorem">C² = A² + B²</option>
+            <option value="quadratic_formula">Quadratic Formula</option>
+            <option value="distance_formula">Distance Between Two Points</option>
+            <option value="probability">Probability</option>
+            <option value="probability">Probability</option>
+        </select>
+        <div id="inputs"></div>
+        <button onclick="redirectToSolvePage()">Calculate</button>
+    </div>
+
+    <script>
+        function showInputs() {
+            let formula = document.getElementById("formula").value;
+            let inputsDiv = document.getElementById("inputs");
+            inputsDiv.innerHTML = "";
+
+            if (formula === "sum_of_squares") {
+                inputsDiv.innerHTML = `
+                    <label for='a'>A:</label>
+                    <input type='number' id='a' placeholder='Enter A'><br>
+                    <label for='b'>B:</label>
+                    <input type='number' id='b' placeholder='Enter B'><br>
+                `;
+            } else if (formula === "pythagorean_theorem") {
+                inputsDiv.innerHTML = `
+                    <label for='a'>A (leave blank if unknown):</label>
+                    <input type='number' id='a' placeholder='Enter A'><br>
+                    <label for='b'>B (leave blank if unknown):</label>
+                    <input type='number' id='b' placeholder='Enter B'><br>
+                    <label for='c'>C (leave blank if unknown):</label>
+                    <input type='number' id='c' placeholder='Enter C'><br>
+                `;
+            } else if (formula === "quadratic_formula") {
+                inputsDiv.innerHTML = `
+                    <label for='a'>A:</label>
+                    <input type='number' id='a' placeholder='Enter A'><br>
+                    <label for='b'>B:</label>
+                    <input type='number' id='b' placeholder='Enter B'><br>
+                    <label for='c'>C:</label>
+                    <input type='number' id='c' placeholder='Enter C'><br>
+                `;
+            } else if (formula === "distance_formula") {
+                inputsDiv.innerHTML = `
+                    <label for='x1'>X₁:</label>
+                    <input type='number' id='x1' placeholder='Enter X₁'><br>
+                    <label for='y1'>Y₁:</label>
+                    <input type='number' id='y1' placeholder='Enter Y₁'><br>
+                    <label for='x2'>X₂:</label>
+                    <input type='number' id='x2' placeholder='Enter X₂'><br>
+                    <label for='y2'>Y₂:</label>
+                    <input type='number' id='y2' placeholder='Enter Y₂'><br>
+                `;
+            } else if (formula === "probability") {
+                inputsDiv.innerHTML = `
+                    <label for='favorable'>Favorable Outcomes:</label>
+                    <input type='number' id='favorable' placeholder='Enter number of favorable outcomes'><br>
+                    <label for='total'>Total Outcomes:</label>
+                    <input type='number' id='total' placeholder='Enter total number of outcomes'><br>
+                `;
+            }
+        }
+
+        function redirectToSolvePage() {
+            let formula = document.getElementById("formula").value;
+            let queryParams = new URLSearchParams();
+            queryParams.append("formula", formula);
+            document.querySelectorAll("#inputs input").forEach(input => {
+                if (input.value) {
+                    queryParams.append(input.id, input.value);
+                }
+            });
+            
+            if (!formula) {
+                alert("Please select a formula.");
+                return;
+            }
+
+            window.location.href = `solve.html?${queryParams.toString()}`;
+        }
+    </script>
+</body>
+</html>
+
+<style>
+/* Ultra Premium Formula Solver Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Body - High-End Luxury Theme */
+body {
+    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Navigation Bar */
+nav {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ffd700;
+}
+
+/* Background Gradient Animation */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Glassmorphism Container */
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    animation: fadeIn 1.2s ease-in-out;
+    margin-top: 80px;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Heading - Elegant Styling */
+h2 {
+    font-size: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #ffd700, #ff9900);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Select & Input Fields */
+select, input {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    color: #000;
+    outline: none;
+    transition: 0.3s ease-in-out;
+}
+
+/* Hover & Focus Effects */
+select:hover, input:hover, select:focus, input:focus {
+    border-color: #ffd700;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.7);
+}
+
+/* Button - 3D Effect */
+button {
+    background: linear-gradient(45deg, #ff9900, #ffd700);
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.4s ease;
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+    text-transform: uppercase;
+}
+
+/* Button Hover - Glow Effect */
+button:hover {
+    background: linear-gradient(45deg, #ffd700, #ff6600);
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.9);
+}
+
+/* Button Click Effect */
+button:active {
+    transform: scale(0.95);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.7);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+</style>
